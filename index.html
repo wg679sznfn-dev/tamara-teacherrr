@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#6b2634">
+<title>Тамара Салмановна — сайт учителя</title>
+<style>
+:root{--wine:#6b2634;--wine2:#4e1b26;--cream:#f3eadb;--paper:#fbf6ee;--ink:#302724;--muted:#75655d;--line:#d9cbbb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(243,234,219,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+.nav{min-height:74px;display:flex;align-items:center;gap:22px}.mobile-menu{display:none;border:1px solid var(--wine);background:transparent;color:var(--wine);padding:10px 13px;font-size:20px}.logo{color:var(--wine);font-weight:800;letter-spacing:.12em;text-decoration:none;white-space:nowrap}.menu{display:flex;gap:17px;justify-content:center;flex:1}.menu a{color:var(--ink);font-size:13px;text-decoration:none}.menu a:hover{color:var(--wine)}button,.btn{font:inherit;cursor:pointer;border-radius:8px;font-weight:700}.login{border:1px solid var(--wine);background:transparent;color:var(--wine);padding:11px 15px}.btn{display:inline-block;text-decoration:none;border:0;padding:13px 19px;background:var(--wine);color:#fff}.hero{padding:88px 0 100px;background:linear-gradient(120deg,#f7efe3,#e8d8c4)}.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:65px}.kicker{font-size:11px;letter-spacing:.18em;color:var(--wine);font-weight:800}.hero h1,h2{font-family:Georgia,"Times New Roman",serif}.hero h1{font-size:clamp(46px,6vw,78px);line-height:1.03;color:var(--wine);margin:12px 0 20px}.lead{font-size:18px;line-height:1.7;color:#5c4c45;max-width:620px}.photo{width:min(390px,82vw);aspect-ratio:4/5;margin:auto;border:9px solid var(--paper);border-radius:16px;background:#d7c2a8;display:grid;place-items:center;text-align:center;color:var(--wine);font-weight:800;letter-spacing:.13em;overflow:hidden;box-shadow:0 22px 55px #4e1b2620}.photo img{width:100%;height:100%;object-fit:cover}.section{padding:82px 0}.section.alt{background:#e9ddcc}.head{margin-bottom:30px}.head h2{font-size:42px;color:var(--wine);margin:7px 0}.paper{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:27px;box-shadow:0 9px 25px #4e1b2610}.about{max-width:850px;line-height:1.8}.schedule{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.day{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:19px}.day strong{display:block;color:var(--wine);margin-bottom:12px}.day p{font-size:13px;line-height:1.55;margin:9px 0}.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card small{color:var(--muted)}.card h3{color:var(--wine);margin:10px 0}.video{display:flex;align-items:center;gap:22px}.play{width:66px;height:66px;border-radius:50%;background:var(--wine);color:white;display:grid;place-items:center;font-size:22px;flex:none}.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.tile{aspect-ratio:4/3;background:#d7c2a8;border-radius:12px;display:grid;place-items:center;color:var(--wine);font-size:11px;font-weight:800;letter-spacing:.12em;overflow:hidden}.tile img{width:100%;height:100%;object-fit:cover}.contacts{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.contacts p{margin-bottom:0}.contact-label{font-size:10px;color:var(--muted);letter-spacing:.12em;font-weight:800}footer{background:var(--wine2);color:#f7eee2;text-align:center;padding:28px;font-size:12px}
+.modal{position:fixed;inset:0;background:#251216b8;z-index:50;display:grid;place-items:center;padding:18px}.hide{display:none}.box{width:min(480px,100%);max-height:92vh;overflow:auto;background:var(--paper);border-radius:16px;padding:30px;position:relative}.close{position:absolute;right:13px;top:8px;border:0;background:none;color:var(--wine);font-size:28px}.box h2{color:var(--wine);margin:6px 0 20px}label{display:block;font-size:12px;font-weight:800;color:var(--wine);margin:13px 0}input,textarea{display:block;width:100%;margin-top:7px;padding:13px;border:1px solid var(--line);border-radius:8px;background:#fffaf3;font:inherit;color:var(--ink)}.wide{width:100%;margin-top:8px}.error{color:#a33546;font-size:13px;min-height:18px}.dashboard{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}.dashbtn{border:1px solid var(--line);background:#fffaf3;color:var(--wine);padding:15px;text-align:left}.status{font-size:13px;color:#5f514a;line-height:1.6}.preview{width:120px;height:150px;object-fit:cover;border-radius:9px;margin-top:6px;border:1px solid var(--line)}
+@media(max-width:900px){.menu{display:none}.mobile-menu{display:block}.hero-grid{grid-template-columns:1fr}.schedule{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}.contacts{grid-template-columns:1fr}}
+@media(max-width:900px){.menu.open{display:flex;position:absolute;top:74px;left:0;right:0;background:var(--cream);border-bottom:1px solid var(--line);padding:18px 4%;flex-direction:column;gap:14px}}@media(max-width:560px){.nav{justify-content:space-between}.login{font-size:12px;padding:10px}.hero{padding:65px 0}.section{padding:62px 0}.cards,.schedule,.gallery,.contacts{grid-template-columns:1fr}.head h2{font-size:35px}.hero h1{font-size:46px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#home">ТАМАРА САЛМАНОВНА</a>
+<nav class="menu" id="siteMenu"><a href="#about">Обо мне</a><a href="#schedule">Расписание</a><a href="#news">Новости</a><a href="#video">Видео</a><a href="#gallery">Фотоальбом</a><a href="#contacts">Контакты</a></nav>
+<button class="mobile-menu" aria-label="Открыть меню" onclick="toggleMobileMenu()">☰</button><button class="login" onclick="openLogin()">Вход для учителя</button>
+</div></header>
+
+<main>
+<section id="home" class="hero"><div class="wrap hero-grid">
+<div><div class="kicker">ПЕРСОНАЛЬНЫЙ САЙТ УЧИТЕЛЯ</div><h1 id="heroName">Тамара<br>Салмановна</h1><p id="heroLead" class="lead">Добро пожаловать на мой сайт. Здесь собрана важная информация о моей работе, расписание, новости, учебные материалы и фотографии.</p><a class="btn" href="#about">Подробнее обо мне</a></div>
+<div class="photo" id="mainPhoto">ФОТО<br>УЧИТЕЛЯ</div>
+</div></section>
+
+<section id="about" class="section"><div class="wrap"><div class="head"><div class="kicker">01 — ОБО МНЕ</div><h2>О преподавателе</h2></div><div class="paper about" id="bio"><p>Здесь будет размещена информация о Тамаре Салмановне, её профессиональном опыте, интересах и достижениях.</p><p>Текст можно изменить через личный кабинет учителя.</p></div></div></section>
+
+<section id="schedule" class="section alt"><div class="wrap"><div class="head"><div class="kicker">02 — РАСПИСАНИЕ</div><h2>Расписание занятий</h2></div>
+<div class="schedule">
+<div class="day"><strong>Понедельник</strong><p>09:00 — Занятие</p><p>10:00 — Занятие</p></div><div class="day"><strong>Вторник</strong><p>09:00 — Занятие</p><p>11:00 — Консультация</p></div><div class="day"><strong>Среда</strong><p>10:00 — Занятие</p><p>12:00 — Занятие</p></div><div class="day"><strong>Четверг</strong><p>09:00 — Занятие</p><p>11:00 — Занятие</p></div><div class="day"><strong>Пятница</strong><p>10:00 — Занятие</p></div>
+</div></div></section>
+
+<section id="news" class="section"><div class="wrap"><div class="head"><div class="kicker">03 — НОВОСТИ</div><h2>Новости и объявления</h2></div>
+<div class="cards"><article class="paper card"><small>05 сентября 2026</small><h3>Добро пожаловать!</h3><p>Здесь будут появляться важные объявления для учеников и родителей.</p></article><article class="paper card"><small>01 сентября 2026</small><h3>Новый учебный год</h3><p>Следите за обновлениями расписания и новостями.</p></article></div></div></section>
+
+<section id="video" class="section alt"><div class="wrap"><div class="head"><div class="kicker">04 — ВИДЕО</div><h2>Видео</h2></div><div class="paper video"><div class="play">▶</div><div><h3>Учебные материалы</h3><p>Здесь будут размещаться видеоуроки и полезные материалы.</p></div></div></div></section>
+
+<section id="gallery" class="section"><div class="wrap"><div class="head"><div class="kicker">05 — ФОТОАЛЬБОМ</div><h2>Фотоальбом</h2></div><div class="gallery"><div class="tile">ФОТО 01</div><div class="tile">ФОТО 02</div><div class="tile">ФОТО 03</div><div class="tile">ФОТО 04</div></div></div></section>
+
+<section id="contacts" class="section alt"><div class="wrap"><div class="head"><div class="kicker">06 — КОНТАКТЫ</div><h2>Контактная информация</h2></div><div class="paper contacts"><div><div class="contact-label">ЭЛЕКТРОННАЯ ПОЧТА</div><p>teacher@example.ru</p></div><div><div class="contact-label">ТЕЛЕФОН</div><p>+7 (000) 000-00-00</p></div><div><div class="contact-label">ШКОЛА</div><p>Образовательная организация</p></div></div></div></section>
+</main><footer>© 2026 Тамара Салмановна · Сайт учителя</footer>
+
+<div id="loginModal" class="modal hide"><div class="box"><button class="close" onclick="closeLogin()">×</button><div class="kicker">ЗАЩИЩЁННЫЙ РАЗДЕЛ</div><h2>Вход для учителя</h2><label>Логин<input id="login" autocomplete="username"></label><label>Пароль<input id="password" type="password" autocomplete="current-password"></label><button class="btn wide" onclick="login()">Войти</button><div id="error" class="error"></div></div></div>
+
+<div id="adminModal" class="modal hide"><div class="box"><button class="close" onclick="closeAdmin()">×</button><div class="kicker">ПАНЕЛЬ УПРАВЛЕНИЯ</div><h2>Кабинет учителя</h2>
+<label>Имя учителя<input id="editName"></label><label>Краткое описание<input id="editSubject"></label><label>Информация о преподавателе<textarea id="editBio" rows="5"></textarea></label><label>Фото учителя<input id="photoInput" type="file" accept="image/*" onchange="previewPhoto(event)"></label><img id="photoPreview" class="preview hide"><button class="btn wide" onclick="saveProfile()">Сохранить изменения</button><p id="saveStatus" class="status"></p><button class="login wide" onclick="closeAdmin()">Выйти</button></div></div>
+
+<script>
+const CREDENTIALS={login:"Tamara062",password:"Tamara1962"};
+function qs(id){return document.getElementById(id)}
+function getProfile(){try{return JSON.parse(localStorage.getItem("tamaraProfile"))||null}catch(e){return null}}
+function applyProfile(){
+ const p=getProfile();if(!p)return;
+ qs("heroName").innerHTML=(p.name||"Тамара Салмановна").replace(" ","<br>");
+ qs("heroLead").textContent=p.subject||"Добро пожаловать на мой сайт.";
+ qs("bio").innerHTML="<p>"+(p.bio||"Информация об учителе.")+"</p><p>Информация обновляется через личный кабинет учителя.</p>";
+ if(p.photo)qs("mainPhoto").innerHTML='<img src="'+p.photo+'" alt="Фото учителя">';
+}
+function toggleMobileMenu(){const m=qs("siteMenu");m.classList.toggle("open")}
+function openLogin(){qs("loginModal").classList.remove("hide");setTimeout(()=>qs("login").focus(),50)}
+function closeLogin(){qs("loginModal").classList.add("hide")}
+function closeAdmin(){qs("adminModal").classList.add("hide")}
+function login(){
+ const l=qs("login").value.trim(),p=qs("password").value;
+ if(l===CREDENTIALS.login&&p===CREDENTIALS.password){
+   qs("error").textContent="";closeLogin();qs("adminModal").classList.remove("hide");
+   const d=getProfile()||{name:"Тамара Салмановна",subject:"Добро пожаловать на мой сайт.",bio:"Здесь будет размещена информация о Тамаре Салмановне, её профессиональном опыте, интересах и достижениях."};
+   qs("editName").value=d.name;qs("editSubject").value=d.subject;qs("editBio").value=d.bio;
+   if(d.photo){qs("photoPreview").src=d.photo;qs("photoPreview").classList.remove("hide")}
+ }else qs("error").textContent="Неверный логин или пароль.";
+}
+function previewPhoto(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{qs("photoPreview").src=r.result;qs("photoPreview").classList.remove("hide")};r.readAsDataURL(f)}
+function saveProfile(){
+ const p={name:qs("editName").value.trim()||"Тамара Салмановна",subject:qs("editSubject").value.trim()||"Добро пожаловать на мой сайт.",bio:qs("editBio").value.trim()||"Информация об учителе."};
+ const old=getProfile();if(old&&old.photo)p.photo=old.photo;if(!qs("photoPreview").classList.contains("hide"))p.photo=qs("photoPreview").src;
+ try{localStorage.setItem("tamaraProfile",JSON.stringify(p));applyProfile();qs("saveStatus").textContent="✓ Изменения сохранены на этом устройстве. При следующем открытии сайта на этом же устройстве они загрузятся автоматически."}catch(e){qs("saveStatus").textContent="Не удалось сохранить изменения в этом режиме просмотра."}
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeLogin();closeAdmin()}});applyProfile();
+</script>
+</body></html>
