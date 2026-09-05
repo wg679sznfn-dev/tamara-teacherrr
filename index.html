@@ -80,5 +80,6 @@ function saveProfile(){
  try{localStorage.setItem("tamaraProfile",JSON.stringify(p));applyProfile();qs("saveStatus").textContent="✓ Изменения сохранены на этом устройстве."}catch(e){qs("saveStatus").textContent="Не удалось сохранить изменения в этом режиме просмотра."}
 }
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeLogin();closeAdmin()}});applyProfile();
+ function openLogin(){qs("loginModal").classList.remove("hide");}
 </script>
 </body></html>
