@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сайт учителя</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f8f3f3;color:#29242d}
+header{background:#fff;border-bottom:1px solid #dcc7cb;position:sticky;top:0;z-index:5}
+.nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;gap:22px}
+.logo{font:700 22px Georgia;color:#50367b;margin-right:auto}nav{display:flex;gap:20px}nav a{color:#333;text-decoration:none}
+.admin{background:#6f2b3b;color:#fff;padding:10px 14px;border-radius:10px}
+.hero{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;background:#fff}
+.heroText{padding:60px 45px;background:linear-gradient(135deg,#fbf4f0,#f4e4e7)}
+h1{font:58px/1.05 Georgia;color:#6f2b3b;margin:0 0 15px}.heroText p{font-size:18px;line-height:1.6}
+.heroImg{min-height:400px;background:#ead5d9;display:flex;align-items:center;justify-content:center;font-size:90px}
+main{max-width:1100px;margin:auto;background:#fff;padding:40px 28px}.title{font:30px Georgia;color:#6f2b3b}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{border:1px solid #dcc7cb;border-radius:14px;padding:22px;background:#fff;box-shadow:0 3px 12px #0000000b}
+.card h3{color:#54202d}.icon{font-size:32px}.news{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid #dcc7cb;padding:12px;text-align:left}th{background:#f4e4e7}
+.album{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.photo{height:160px;border-radius:12px;background:#ead5d9;display:flex;align-items:center;justify-content:center;color:#6f2b3b}
+footer{padding:28px;text-align:center;background:#ead5d9;color:#54202d}
+@media(max-width:800px){nav{display:none}.nav{padding:12px 15px}.logo{font-size:18px}.hero{display:block}.heroText{padding:38px 20px;text-align:center}.heroImg{min-height:300px}h1{font-size:42px}main{padding:28px 15px}.cards,.news{grid-template-columns:1fr}.album{grid-template-columns:repeat(2,1fr)}.admin{font-size:13px;padding:9px 10px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">Сайт учителя</div>
+<nav><a href="#teacher">О преподавателе</a><a href="#schedule">Расписание</a><a href="#news">Новости</a><a href="#album">Фотоальбом</a></nav>
+<a class="admin" href="#admin">Панель учителя</a></div></header>
+
+<section class="hero"><div class="heroText"><h1>Тамара<br>Салмановна</h1>
+<p><b>Учитель начальных классов</b></p><p>Добро пожаловать на сайт. Здесь размещаются информация об учителе, расписание, новости и фотографии.</p></div>
+<div class="heroImg">👩‍🏫</div></section>
+
+<main>
+<section id="teacher"><h2 class="title">Разделы сайта</h2><div class="cards">
+<div class="card"><div class="icon">👤</div><h3>О преподавателе</h3><p>Образование, опыт и достижения.</p></div>
+<div class="card"><div class="icon">📅</div><h3>Расписание</h3><p>Расписание уроков и занятий.</p></div>
+<div class="card"><div class="icon">📰</div><h3>Новости</h3><p>Новости и важные объявления.</p></div>
+<div class="card"><div class="icon">🖼️</div><h3>Фотоальбом</h3><p>Фотографии школьной жизни.</p></div>
+</div></section>
+
+<section style="margin-top:45px"><h2 class="title">О преподавателе</h2>
+<div class="card"><p>Здесь будет размещена информация об учителе, образовании, профессиональном опыте, интересах и достижениях.</p></div></section>
+
+<section id="news" style="margin-top:45px"><h2 class="title">Новости</h2><div class="news">
+<div class="card"><h3>Добро пожаловать</h3><p>Сайт учителя готов к работе.</p></div>
+<div class="card"><h3>Объявления</h3><p>Новые объявления будут появляться здесь.</p></div>
+<div class="card"><h3>Новости класса</h3><p>Здесь будут новости и события.</p></div>
+</div></section>
+
+<section id="schedule" style="margin-top:45px"><h2 class="title">Расписание</h2>
+<table><tr><th>День</th><th>Время</th><th>Предмет</th><th>Кабинет</th></tr>
+<tr><td>Понедельник</td><td>08:30</td><td>Математика</td><td>12</td></tr>
+<tr><td>Вторник</td><td>08:30</td><td>Русский язык</td><td>12</td></tr>
+<tr><td>Среда</td><td>08:30</td><td>Литературное чтение</td><td>12</td></tr></table></section>
+
+<section id="album" style="margin-top:45px"><h2 class="title">Фотоальбом</h2>
+<div class="album"><div class="photo">Фото 1</div><div class="photo">Фото 2</div><div class="photo">Фото 3</div><div class="photo">Фото 4</div></div></section>
+</main>
+<footer>© Сайт учителя</footer>
+</body></html>
