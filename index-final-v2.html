@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сайт учителя</title>
+<style>
+:root{
+  --burgundy:#6f2b3b;--burgundy2:#54202d;--cream:#fbf6f3;
+  --rose:#ead8dc;--line:#dfc9ce;--text:#302a2c;--white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--text);font-family:Arial,sans-serif;line-height:1.55}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line)}
+.nav{max-width:1120px;margin:auto;padding:14px 20px;display:flex;align-items:center;gap:22px}
+.logo{font:700 22px Georgia,serif;color:var(--burgundy);margin-right:auto}
+nav{display:flex;gap:18px}
+nav a{color:var(--text);text-decoration:none;font-size:15px}
+nav a:hover{color:var(--burgundy)}
+.admin-btn,.btn{border:0;border-radius:10px;background:var(--burgundy);color:#fff;padding:11px 16px;cursor:pointer;font-weight:700}
+.admin-btn:hover,.btn:hover{background:var(--burgundy2)}
+.hero{max-width:1120px;margin:auto;display:grid;grid-template-columns:1fr 1fr;background:#fff}
+.hero-text{padding:64px 52px;background:linear-gradient(135deg,#fffaf6,#f1e1e4)}
+h1{margin:0 0 14px;color:var(--burgundy);font:58px/1.04 Georgia,serif}
+.hero-text p{font-size:18px}
+.hero-photo{min-height:410px;background:var(--rose);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.photo-placeholder{font-size:90px;opacity:.55}
+main{max-width:1120px;margin:auto;background:#fff;padding:46px 28px}
+section{scroll-margin-top:90px;margin-bottom:58px}
+.title{font:32px Georgia,serif;color:var(--burgundy);margin:0 0 22px}
+.card{border:1px solid var(--line);border-radius:15px;padding:22px;background:#fff;box-shadow:0 3px 15px rgba(50,20,25,.06)}
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.info-item strong{display:block;color:var(--burgundy2);margin-bottom:4px}
+.week{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.day-card{border:1px solid var(--line);border-radius:14px;padding:17px;background:#fff}
+.day-card h3{margin:0 0 10px;color:var(--burgundy)}
+.day-card ul{margin:0;padding-left:20px}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.news-card h3{margin:0 0 7px;color:var(--burgundy)}
+.news-date{font-size:13px;color:#76676b;margin-bottom:10px}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.gallery-item{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.gallery-item img{display:block;width:100%;height:210px;object-fit:cover}
+.gallery-item figcaption{padding:10px 12px}
+.teacher-photo-wrap{text-align:center}
+.teacher-photo-wrap img{max-width:100%;max-height:620px;border-radius:16px;object-fit:contain;border:1px solid var(--line)}
+footer{padding:28px;text-align:center;background:var(--rose);color:var(--burgundy2)}
+
+.modal{display:none;position:fixed;inset:0;background:rgba(20,10,12,.58);z-index:100;padding:18px;overflow:auto}
+.modal.open{display:block}
+.panel{max-width:900px;margin:25px auto;background:#fff;border-radius:18px;padding:24px}
+.panel-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.panel-head h2{margin:0;color:var(--burgundy);font:30px Georgia,serif;margin-right:auto}
+.close{border:0;background:#eee;border-radius:9px;padding:9px 13px;cursor:pointer}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tab{border:1px solid var(--line);background:#fff;color:var(--burgundy2);padding:9px 13px;border-radius:9px;cursor:pointer}
+.tab.active{background:var(--burgundy);color:#fff}
+.admin-section{display:none}
+.admin-section.active{display:block}
+label{display:block;font-weight:700;color:var(--burgundy2);margin:13px 0 6px}
+input[type=text],input[type=email],input[type=number],input[type=date],textarea{
+  width:100%;padding:11px 12px;border:1px solid #cdbbc0;border-radius:9px;font:inherit
+}
+textarea{min-height:100px;resize:vertical}
+.file{width:100%;padding:10px;border:1px dashed #cdbbc0;border-radius:9px;background:#fff}
+.save-row{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.status{padding:11px 13px;border-radius:9px;background:#f4edef;color:var(--burgundy2);margin-bottom:16px}
+.status.ok{background:#edf6ee;color:#275b32}
+.status.err{background:#fff0f0;color:#8a1f2d}
+.help{font-size:13px;color:#75686c;margin-top:7px}
+.day-editor{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:start;margin-bottom:14px}
+.day-editor h3{margin:11px 0;color:var(--burgundy)}
+.list{display:grid;gap:10px}
+.edit-card{border:1px solid var(--line);border-radius:12px;padding:14px}
+.edit-card h3{margin:0 0 7px;color:var(--burgundy)}
+.edit-actions{display:flex;gap:8px;margin-top:9px}
+.btn.secondary{background:#eee;color:var(--burgundy2)}
+.btn.danger{background:#8a3342}
+.preview{margin-top:10px;max-width:220px;max-height:180px;border-radius:10px;border:1px solid var(--line);object-fit:cover}
+@media(max-width:850px){
+  nav{display:none}.hero{grid-template-columns:1fr}.hero-photo{min-height:300px}
+  h1{font-size:45px}.hero-text{padding:42px 25px;text-align:center}
+  .week{grid-template-columns:1fr}.news-grid{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(2,1fr)}
+  .info-grid{grid-template-columns:1fr}.day-editor{grid-template-columns:1fr;gap:2px}
+}
+@media(max-width:500px){
+  .nav{padding:11px 13px}.logo{font-size:18px}.admin-btn{padding:9px 11px;font-size:13px}
+  main{padding:32px 15px}.gallery{grid-template-columns:1fr}
+  .panel{margin:5px auto;padding:17px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Сайт учителя</div>
+    <nav>
+      <a href="#about">О преподавателе</a>
+      <a href="#schedule">Расписание</a>
+      <a href="#news">Новости</a>
+      <a href="#gallery">Фотоальбом</a>
+      <a href="#teacherPhoto">Фото учителя</a>
+    </nav>
+    <button class="admin-btn" id="openAdmin">Панель учителя</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1 id="heroName">Тамара<br>Салмановна</h1>
+    <p id="heroSubject"><b>Учитель начальных классов</b></p>
+    <p>Добро пожаловать на сайт. Здесь размещаются информация об учителе, расписание, новости и фотографии.</p>
+  </div>
+  <div class="hero-photo" id="heroPhoto"><div class="photo-placeholder">👩‍🏫</div></div>
+</section>
+
+<main>
+  <section id="about">
+    <h2 class="title">О преподавателе</h2>
+    <div class="card">
+      <div class="info-grid">
+        <div class="info-item"><strong>Имя</strong><span id="pName">—</span></div>
+        <div class="info-item"><strong>Предмет</strong><span id="pSubject">—</span></div>
+        <div class="info-item"><strong>Образование</strong><span id="pEducation">—</span></div>
+        <div class="info-item"><strong>Опыт работы</strong><span id="pExperience">—</span></div>
+        <div class="info-item"><strong>Специализация</strong><span id="pSpecialization">—</span></div>
+        <div class="info-item"><strong>Место работы / город</strong><span id="pLocation">—</span></div>
+      </div>
+      <div style="margin-top:18px"><strong style="color:var(--burgundy2)">О себе</strong><p id="pBio">Информация пока не добавлена.</p></div>
+    </div>
+  </section>
+
+  <section id="schedule">
+    <h2 class="title">Расписание</h2>
+    <div class="week" id="publicSchedule"></div>
+  </section>
+
+  <section id="news">
+    <h2 class="title">Новости</h2>
+    <div class="news-grid" id="publicNews"></div>
+  </section>
+
+  <section id="gallery">
+    <h2 class="title">Фотоальбом</h2>
+    <div class="gallery" id="publicGallery"></div>
+  </section>
+
+  <section id="teacherPhoto">
+    <h2 class="title">Фото учителя</h2>
+    <div class="card teacher-photo-wrap" id="publicTeacherPhoto">
+      <p>Фото пока не добавлено.</p>
+    </div>
+  </section>
+</main>
+
+<footer>© Сайт учителя</footer>
+
+<div class="modal" id="adminModal">
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Панель учителя</h2>
+      <button class="close" id="closeAdmin">Закрыть</button>
+    </div>
+
+    <div id="loginBox">
+      <div class="status">Введите данные для входа.</div>
+      <label>Логин</label>
+      <input id="login" type="text" autocomplete="username">
+      <label>Пароль</label>
+      <input id="password" type="password" autocomplete="current-password">
+      <div class="save-row"><button class="btn" id="loginBtn">Войти</button></div>
+    </div>
+
+    <div id="adminBox" style="display:none">
+      <div id="adminStatus" class="status">Подключение к базе данных…</div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="scheduleAdmin">Расписание</button>
+        <button class="tab" data-tab="teacherAdmin">Информация</button>
+        <button class="tab" data-tab="newsAdmin">Новости</button>
+        <button class="tab" data-tab="galleryAdmin">Фотоальбом</button>
+        <button class="tab" data-tab="photoAdmin">Фото учителя</button>
+      </div>
+
+      <div class="admin-section active" id="scheduleAdmin">
+        <h3>Расписание на неделю</h3>
+        <p class="help">В каждом поле можно написать все предметы этого дня — по одному предмету на строке. Сохраняется вся неделя одной кнопкой.</p>
+        <div id="scheduleEditor"></div>
+        <div class="save-row"><button class="btn" id="saveSchedule">Сохранить расписание</button></div>
+      </div>
+
+      <div class="admin-section" id="teacherAdmin">
+        <h3>Информация об учителе</h3>
+        <label>Имя</label><input id="tName" type="text">
+        <label>Email</label><input id="tEmail" type="email">
+        <label>Телефон</label><input id="tPhone" type="text">
+        <label>Предмет</label><input id="tSubject" type="text">
+        <label>Опыт работы, лет</label><input id="tExperience" type="number" min="0">
+        <label>Образование</label><input id="tEducation" type="text">
+        <label>Место работы / город</label><input id="tLocation" type="text">
+        <label>Специализация</label><input id="tSpecialization" type="text">
+        <label>О себе</label><textarea id="tBio"></textarea>
+        <div class="save-row"><button class="btn" id="saveTeacher">Сохранить информацию</button></div>
+      </div>
+
+      <div class="admin-section" id="newsAdmin">
+        <h3>Новости</h3>
+        <div id="newsList" class="list"></div>
+        <div class="card" style="margin-top:16px">
+          <h3>Добавить новость</h3>
+          <label>Заголовок</label><input id="newNewsTitle" type="text">
+          <label>Текст</label><textarea id="newNewsContent"></textarea>
+          <label>Дата</label><input id="newNewsDate" type="date">
+          <div class="save-row"><button class="btn" id="addNews">Сохранить новость</button></div>
+        </div>
+      </div>
+
+      <div class="admin-section" id="galleryAdmin">
+        <h3>Фотоальбом</h3>
+        <div id="galleryList" class="list"></div>
+        <div class="card" style="margin-top:16px">
+          <h3>Добавить фото</h3>
+          <label>Выбрать файл</label>
+          <input id="newGalleryFile" class="file" type="file" accept="image/*">
+          <label>Подпись</label><input id="newGalleryCaption" type="text">
+          <div id="galleryPreviewBox"></div>
+          <div class="save-row"><button class="btn" id="addGallery">Сохранить фото</button></div>
+          <div class="help">Фото автоматически уменьшается для надёжного хранения в существующей таблице.</div>
+        </div>
+      </div>
+
+      <div class="admin-section" id="photoAdmin">
+        <h3>Фото учителя</h3>
+        <label>Выбрать файл</label>
+        <input id="teacherFile" class="file" type="file" accept="image/*">
+        <div id="teacherPreviewBox"></div>
+        <div class="save-row"><button class="btn" id="saveTeacherPhoto">Сохранить фото учителя</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://njeviateaxviulfttntl.supabase.co";
+const SUPABASE_KEY="sb_publishable_TMdzjPqTgCSbTqbOdAmyJA_qzob1f-h";
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const DAYS=["Понедельник","Вторник","Среда","Четверг","Пятница"];
+let teacherRow=null, scheduleRows=[], newsRows=[], galleryRows=[];
+let teacherPhotoData=null, newGalleryData=null;
+
+const $=id=>document.getElementById(id);
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+}
+function status(msg,type=""){
+  const el=$("adminStatus");
+  if(!el)return;
+  el.textContent=msg;el.className="status"+(type?" "+type:"");
+}
+function showError(prefix,err){
+  console.error(err);
+  const msg=err?.message || err?.details || String(err);
+  status(prefix+": "+msg,"err");
+}
+async function run(label,fn){
+  try{return await fn()}catch(e){showError(label,e);throw e}
+}
+
+/* ---------- public rendering ---------- */
+function renderTeacher(){
+  const t=teacherRow||{};
+  $("pName").textContent=t.name||"—";
+  $("pSubject").textContent=t.subject||"—";
+  $("pEducation").textContent=t.education||"—";
+  $("pExperience").textContent=t.experience!=null && t.experience!=="" ? t.experience+" лет" : "—";
+  $("pSpecialization").textContent=t.specialization||"—";
+  $("pLocation").textContent=t.location||"—";
+  $("pBio").textContent=t.bio||"Информация пока не добавлена.";
+  $("heroSubject").innerHTML="<b>"+esc(t.subject||"Учитель")+"</b>";
+  if(t.avatar_url){
+    $("heroPhoto").innerHTML='<img src="'+esc(t.avatar_url)+'" alt="Фото учителя">';
+    $("publicTeacherPhoto").innerHTML='<img src="'+esc(t.avatar_url)+'" alt="Фото учителя">';
+  }else{
+    $("heroPhoto").innerHTML='<div class="photo-placeholder">👩‍🏫</div>';
+    $("publicTeacherPhoto").innerHTML="<p>Фото пока не добавлено.</p>";
+  }
+}
+function renderSchedule(){
+  const map={};DAYS.forEach(d=>map[d]=[]);
+  scheduleRows.forEach(r=>{
+    if(map[r.day] && r.subject){
+      String(r.subject).split(/\r?\n/).map(x=>x.trim()).filter(Boolean).forEach(x=>map[r.day].push(x));
+    }
+  });
+  $("publicSchedule").innerHTML=DAYS.map(d=>{
+    const items=map[d];
+    return '<div class="day-card"><h3>'+esc(d)+'</h3>'+
+      (items.length?'<ul>'+items.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>":"<p>Пока не заполнено.</p>")+
+      "</div>";
+  }).join("");
+}
+function renderNews(){
+  if(!newsRows.length){$("publicNews").innerHTML='<div class="card"><p>Новостей пока нет.</p></div>';return}
+  $("publicNews").innerHTML=newsRows.map(n=>
+    '<article class="card news-card"><h3>'+esc(n.title||"Без заголовка")+'</h3>'+
+    (n.published_at?'<div class="news-date">'+esc(n.published_at)+"</div>":"")+
+    '<div>'+esc(n.content||"")+'</div></article>'
+  ).join("");
+}
+function renderGallery(){
+  if(!galleryRows.length){$("publicGallery").innerHTML='<div class="card"><p>Фото пока нет.</p></div>';return}
+  $("publicGallery").innerHTML=galleryRows.map(g=>
+    '<figure class="gallery-item"><img src="'+esc(g.image_url||"")+'" alt="'+esc(g.caption||"Фото")+'">'+
+    (g.caption?'<figcaption>'+esc(g.caption)+"</figcaption>":"")+"</figure>"
+  ).join("");
+}
+
+/* ---------- data loading ---------- */
+async function loadAll(){
+  status("Загружаю данные…");
+  const [t,s,n,g]=await Promise.all([
+    db.from("teachers").select("*").order("id",{ascending:true}).limit(1),
+    db.from("schedule").select("*").order("id",{ascending:true}),
+    db.from("news").select("*").order("id",{ascending:false}),
+    db.from("gallery").select("*").order("id",{ascending:false})
+  ]);
+  for(const x of [t,s,n,g]) if(x.error) throw x.error;
+  teacherRow=t.data?.[0]||null;
+  scheduleRows=s.data||[];
+  newsRows=n.data||[];
+  galleryRows=g.data||[];
+  renderTeacher();renderSchedule();renderNews();renderGallery();
+  buildScheduleEditor();buildNewsList();buildGalleryList();
+  fillTeacherForm();
+  status("Соединение с базой данных работает.","ok");
+}
+
+/* ---------- admin login ---------- */
+$("openAdmin").onclick=()=>{$("adminModal").classList.add("open");document.body.style.overflow="hidden"};
+$("closeAdmin").onclick=()=>{$("adminModal").classList.remove("open");document.body.style.overflow=""};
+$("adminModal").addEventListener("click",e=>{if(e.target===$("adminModal")){$("adminModal").classList.remove("open");document.body.style.overflow=""}});
+
+$("loginBtn").onclick=async()=>{
+  if($("login").value==="Tamara062" && $("password").value==="Tamara1962"){
+    $("loginBox").style.display="none";$("adminBox").style.display="block";
+    try{await loadAll()}catch(e){showError("Не удалось загрузить данные",e)}
+  }else{
+    $("loginBox").querySelector(".status").textContent="Неверный логин или пароль.";
+    $("loginBox").querySelector(".status").className="status err";
+  }
+};
+$("password").addEventListener("keydown",e=>{if(e.key==="Enter")$("loginBtn").click()});
+
+/* ---------- tabs ---------- */
+document.querySelectorAll(".tab").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".admin-section").forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active");$(btn.dataset.tab).classList.add("active");
+  };
+});
+
+/* ---------- schedule ---------- */
+function buildScheduleEditor(){
+  const map={};DAYS.forEach(d=>map[d]="");
+  scheduleRows.forEach(r=>{
+    if(map[r.day]!==undefined){
+      if(map[r.day]) map[r.day]+="\n";
+      map[r.day]+=r.subject||"";
+    }
+  });
+  $("scheduleEditor").innerHTML=DAYS.map((d,i)=>
+    '<div class="day-editor"><h3>'+esc(d)+'</h3><textarea id="day_'+i+'" placeholder="Например:\nМатематика\nРусский язык\nОкружающий мир">'+esc(map[d])+"</textarea></div>"
+  ).join("");
+}
+$("saveSchedule").onclick=async()=>{
+  const btn=$("saveSchedule");btn.disabled=true;status("Сохраняю расписание…");
+  try{
+    for(let i=0;i<DAYS.length;i++){
+      const day=DAYS[i],subject=$("day_"+i).value.trim();
+      const existing=scheduleRows.filter(r=>r.day===day);
+      if(existing.length){
+        const first=existing[0];
+        const {error}=await db.from("schedule").update({subject}).eq("id",first.id);
+        if(error)throw error;
+        if(existing.length>1){
+          const ids=existing.slice(1).map(r=>r.id);
+          const {error:e2}=await db.from("schedule").delete().in("id",ids);
+          if(e2)throw e2;
+        }
+      }else{
+        const {error}=await db.from("schedule").insert({
+          day,subject,time:"",class_name:"",room:""
+        });
+        if(error)throw error;
+      }
+    }
+    await loadAll();status("Расписание сохранено.","ok");
+  }catch(e){showError("Расписание не сохранено",e)}
+  finally{btn.disabled=false}
+};
+
+/* ---------- teacher ---------- */
+function fillTeacherForm(){
+  const t=teacherRow||{};
+  $("tName").value=t.name||"";
+  $("tEmail").value=t.email||"";
+  $("tPhone").value=t.phone||"";
+  $("tSubject").value=t.subject||"";
+  $("tExperience").value=t.experience??"";
+  $("tEducation").value=t.education||"";
+  $("tLocation").value=t.location||"";
+  $("tSpecialization").value=t.specialization||"";
+  $("tBio").value=t.bio||"";
+}
+$("saveTeacher").onclick=async()=>{
+  const btn=$("saveTeacher");btn.disabled=true;status("Сохраняю информацию…");
+  try{
+    const payload={
+      name:$("tName").value.trim(),email:$("tEmail").value.trim(),phone:$("tPhone").value.trim(),
+      subject:$("tSubject").value.trim(),experience:$("tExperience").value===""?null:Number($("tExperience").value),
+      education:$("tEducation").value.trim(),location:$("tLocation").value.trim(),
+      specialization:$("tSpecialization").value.trim(),bio:$("tBio").value.trim()
+    };
+    let res;
+    if(teacherRow?.id) res=await db.from("teachers").update(payload).eq("id",teacherRow.id).select().single();
+    else res=await db.from("teachers").insert(payload).select().single();
+    if(res.error)throw res.error;
+    teacherRow=res.data;renderTeacher();fillTeacherForm();status("Информация сохранена.","ok");
+  }catch(e){showError("Информация не сохранена",e)}
+  finally{btn.disabled=false}
+};
+
+/* ---------- image compression ---------- */
+function compressImage(file,maxSide=1200,quality=.72){
+  return new Promise((resolve,reject)=>{
+    if(!file)return reject(new Error("Файл не выбран."));
+    if(!file.type.startsWith("image/"))return reject(new Error("Нужно выбрать изображение."));
+    const reader=new FileReader();
+    reader.onerror=()=>reject(new Error("Не удалось прочитать файл."));
+    reader.onload=()=>{
+      const img=new Image();
+      img.onerror=()=>reject(new Error("Не удалось открыть изображение."));
+      img.onload=()=>{
+        let w=img.naturalWidth,h=img.naturalHeight;
+        const scale=Math.min(1,maxSide/Math.max(w,h));w=Math.round(w*scale);h=Math.round(h*scale);
+        const c=document.createElement("canvas");c.width=w;c.height=h;
+        const ctx=c.getContext("2d");ctx.drawImage(img,0,0,w,h);
+        const data=c.toDataURL("image/jpeg",quality);
+        if(data.length>650000) return resolve(compressImage(file,900,.58));
+        resolve(data);
+      };
+      img.src=reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ---------- teacher photo ---------- */
+$("teacherFile").onchange=async e=>{
+  try{
+    teacherPhotoData=await compressImage(e.target.files[0]);
+    $("teacherPreviewBox").innerHTML='<img class="preview" src="'+teacherPhotoData+'" alt="Предпросмотр">';
+  }catch(err){showError("Фото не подготовлено",err)}
+};
+$("saveTeacherPhoto").onclick=async()=>{
+  if(!teacherPhotoData){status("Сначала выберите файл с фотографией.","err");return}
+  const btn=$("saveTeacherPhoto");btn.disabled=true;status("Сохраняю фото учителя…");
+  try{
+    if(!teacherRow?.id){
+      const {data,error}=await db.from("teachers").insert({name:"Тамара Салмановна",avatar_url:teacherPhotoData}).select().single();
+      if(error)throw error;teacherRow=data;
+    }else{
+      const {data,error}=await db.from("teachers").update({avatar_url:teacherPhotoData}).eq("id",teacherRow.id).select().single();
+      if(error)throw error;teacherRow=data;
+    }
+    renderTeacher();teacherPhotoData=null;$("teacherFile").value="";$("teacherPreviewBox").innerHTML="";
+    status("Фото учителя сохранено.","ok");
+  }catch(e){showError("Фото учителя не сохранено",e)}
+  finally{btn.disabled=false}
+};
+
+/* ---------- news ---------- */
+function buildNewsList(){
+  $("newsList").innerHTML=newsRows.length?newsRows.map(n=>
+    '<div class="edit-card"><h3>'+esc(n.title||"Без заголовка")+'</h3>'+
+    '<label>Заголовок</label><input type="text" id="nt_'+n.id+'" value="'+esc(n.title||"")+'">'+
+    '<label>Текст</label><textarea id="nc_'+n.id+'">'+esc(n.content||"")+'</textarea>'+
+    '<label>Дата</label><input type="date" id="nd_'+n.id+'" value="'+esc(n.published_at||"")+'">'+
+    '<div class="edit-actions"><button class="btn" onclick="saveNews('+n.id+')">Сохранить</button><button class="btn danger" onclick="deleteNews('+n.id+')">Удалить</button></div></div>'
+  ).join(""):'<div class="status">Новостей пока нет.</div>';
+}
+window.saveNews=async id=>{
+  try{
+    const {error}=await db.from("news").update({
+      title:$("nt_"+id).value.trim(),content:$("nc_"+id).value.trim(),published_at:$("nd_"+id).value
+    }).eq("id",id);
+    if(error)throw error;
+    await loadAll();status("Новость сохранена.","ok");
+  }catch(e){showError("Новость не сохранена",e)}
+};
+window.deleteNews=async id=>{
+  if(!confirm("Удалить эту новость?"))return;
+  try{
+    const {error}=await db.from("news").delete().eq("id",id);if(error)throw error;
+    await loadAll();status("Новость удалена.","ok");
+  }catch(e){showError("Новость не удалена",e)}
+};
+$("addNews").onclick=async()=>{
+  const btn=$("addNews");btn.disabled=true;status("Сохраняю новость…");
+  try{
+    const payload={title:$("newNewsTitle").value.trim(),content:$("newNewsContent").value.trim(),published_at:$("newNewsDate").value};
+    if(!payload.title && !payload.content)throw new Error("Заполните заголовок или текст новости.");
+    const {error}=await db.from("news").insert(payload);if(error)throw error;
+    $("newNewsTitle").value="";$("newNewsContent").value="";$("newNewsDate").value="";
+    await loadAll();status("Новость сохранена.","ok");
+  }catch(e){showError("Новость не сохранена",e)}
+  finally{btn.disabled=false}
+};
+
+/* ---------- gallery ---------- */
+$("newGalleryFile").onchange=async e=>{
+  try{
+    newGalleryData=await compressImage(e.target.files[0]);
+    $("galleryPreviewBox").innerHTML='<img class="preview" src="'+newGalleryData+'" alt="Предпросмотр">';
+  }catch(err){showError("Фото не подготовлено",err)}
+};
+function buildGalleryList(){
+  $("galleryList").innerHTML=galleryRows.length?galleryRows.map(g=>
+    '<div class="edit-card"><img class="preview" src="'+esc(g.image_url||"")+'" alt="">'+
+    '<label>Подпись</label><input type="text" id="gc_'+g.id+'" value="'+esc(g.caption||"")+'">'+
+    '<div class="edit-actions"><button class="btn" onclick="saveGallery('+g.id+')">Сохранить</button><button class="btn danger" onclick="deleteGallery('+g.id+')">Удалить</button></div></div>'
+  ).join(""):'<div class="status">Фотоальбом пока пуст.</div>';
+}
+window.saveGallery=async id=>{
+  try{
+    const {error}=await db.from("gallery").update({caption:$("gc_"+id).value.trim()}).eq("id",id);if(error)throw error;
+    await loadAll();status("Подпись сохранена.","ok");
+  }catch(e){showError("Фото не изменено",e)}
+};
+window.deleteGallery=async id=>{
+  if(!confirm("Удалить это фото?"))return;
+  try{
+    const {error}=await db.from("gallery").delete().eq("id",id);if(error)throw error;
+    await loadAll();status("Фото удалено.","ok");
+  }catch(e){showError("Фото не удалено",e)}
+};
+$("addGallery").onclick=async()=>{
+  if(!newGalleryData){status("Сначала выберите файл с фотографией.","err");return}
+  const btn=$("addGallery");btn.disabled=true;status("Сохраняю фото…");
+  try{
+    const {error}=await db.from("gallery").insert({image_url:newGalleryData,caption:$("newGalleryCaption").value.trim()});
+    if(error)throw error;
+    newGalleryData=null;$("newGalleryFile").value="";$("newGalleryCaption").value="";$("galleryPreviewBox").innerHTML="";
+    await loadAll();status("Фото сохранено.","ok");
+  }catch(e){showError("Фото не сохранено",e)}
+  finally{btn.disabled=false}
+};
+
+/* First public load. If access is blocked, the site still opens. */
+(async()=>{try{await loadAll()}catch(e){console.error("Public load:",e)}})();
+</script>
+</body>
+</html>
