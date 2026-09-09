@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Сайт учителя — Тамара Салмановна</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,sans-serif;background:#f8f3f3;color:#29242d}
+header{background:#fff;border-bottom:1px solid #dcc7cb;position:sticky;top:0;z-index:20}.nav{max-width:1100px;margin:auto;padding:15px 20px;display:flex;align-items:center;gap:20px}
+.logo{font:700 22px Georgia;color:#6f2b3b;margin-right:auto}nav{display:flex;gap:18px;flex-wrap:wrap}nav a{color:#333;text-decoration:none}
+.admin{background:#6f2b3b;color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;white-space:nowrap}
+.hero{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;background:#fff}.heroText{padding:60px 45px;background:linear-gradient(135deg,#fbf4f0,#f4e4e7)}
+h1{font:58px/1.05 Georgia;color:#6f2b3b;margin:0 0 15px}.heroText p{font-size:18px;line-height:1.6}.heroImg{min-height:400px;background:#ead5d9;display:flex;align-items:center;justify-content:center;font-size:90px;overflow:hidden}.heroImg img{width:100%;height:100%;object-fit:cover}
+main{max-width:1100px;margin:auto;background:#fff;padding:40px 28px}section{scroll-margin-top:90px;margin-bottom:55px}.title{font:30px Georgia;color:#6f2b3b;margin:0 0 20px}
+.card{border:1px solid #dcc7cb;border-radius:14px;padding:22px;background:#fff;box-shadow:0 3px 12px #0000000b}.teacherInfo p{line-height:1.7;margin:8px 0}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid #dcc7cb;padding:12px;text-align:left}th{background:#f4e4e7;color:#54202d}.tableWrap{overflow-x:auto}
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.news .card h3{margin-top:0}.album{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.photo{min-height:160px;border-radius:12px;background:#ead5d9;overflow:hidden}.photo img{width:100%;height:180px;object-fit:cover;display:block}.photo div{padding:10px;color:#6f2b3b}
+footer{padding:28px;text-align:center;background:#ead5d9;color:#54202d}.modal{display:none;position:fixed;inset:0;background:#0008;z-index:100;align-items:center;justify-content:center;padding:15px}.modal.open{display:flex}.panel{width:min(100%,1000px);max-height:92vh;overflow:auto;background:#fff;border-radius:18px;padding:24px}.panelTop{display:flex;align-items:center;gap:12px;margin-bottom:20px}.panelTop h2{margin:0;color:#6f2b3b;font-family:Georgia}.close{margin-left:auto;border:0;background:#ead5d9;color:#54202d;border-radius:9px;padding:8px 12px;cursor:pointer}
+.loginBox{max-width:420px;margin:auto}input,textarea{width:100%;padding:11px;border:1px solid #ccb8bd;border-radius:9px;font:inherit;margin-top:6px}label{display:block;margin:12px 0;font-weight:600}button{border:0;border-radius:9px;padding:10px 14px;background:#6f2b3b;color:#fff;cursor:pointer}button.secondary{background:#ead5d9;color:#54202d}button.danger{background:#8a293b}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.adminSection{border-top:1px solid #ead5d9;padding-top:20px;margin-top:20px}.editorRow{border:1px solid #dcc7cb;border-radius:12px;padding:15px;margin:10px 0}.status{padding:10px;border-radius:9px;background:#f4e4e7;color:#54202d;margin:10px 0;display:none}.small{font-size:13px;color:#665b5e}
+@media(max-width:800px){nav{display:none}.nav{padding:12px 15px}.logo{font-size:18px}.hero{display:block}.heroText{padding:38px 20px;text-align:center}.heroImg{min-height:300px}h1{font-size:42px}main{padding:28px 15px}.news{grid-template-columns:1fr}.album{grid-template-columns:repeat(2,1fr)}.admin{font-size:13px;padding:9px 10px}}
+@media(max-width:480px){.album{grid-template-columns:1fr}.panel{padding:16px}.heroImg{min-height:240px}}
+</style></head><body>
+<header><div class="nav"><div class="logo">Сайт учителя</div><nav><a href="#teacher">О преподавателе</a><a href="#schedule">Расписание</a><a href="#news">Новости</a><a href="#album">Фотоальбом</a></nav><a class="admin" href="#" id="adminBtn">Панель учителя</a></div></header>
+<section class="hero"><div class="heroText"><h1>Тамара<br>Салмановна</h1><p><b>Учитель начальных классов</b></p><p>Добро пожаловать на сайт. Здесь размещаются информация об учителе, расписание, новости и фотографии.</p></div><div class="heroImg" id="heroPhoto">👩‍🏫</div></section>
+<main>
+<section id="teacher"><h2 class="title">О преподавателе</h2><div class="card teacherInfo" id="teacherInfo">Загрузка информации…</div></section>
+<section id="schedule"><h2 class="title">Расписание</h2><div class="card tableWrap"><table><thead><tr id="scheduleHead"><th>День</th><th>Предметы</th></tr></thead><tbody id="scheduleBody"><tr><td colspan="2">Загрузка…</td></tr></tbody></table></div></section>
+<section id="news"><h2 class="title">Новости</h2><div class="news" id="newsList"><div class="card">Загрузка…</div></div></section>
+<section id="album"><h2 class="title">Фотоальбом</h2><div class="album" id="albumList"><div class="photo"><div>Загрузка…</div></div></div></section>
+</main><footer>© Сайт учителя</footer>
+
+<div class="modal" id="loginModal"><div class="panel loginBox"><div class="panelTop"><h2>Вход в панель учителя</h2><button class="close" id="closeLogin">×</button></div><label>Логин<input id="login"></label><label>Пароль<input id="password" type="password"></label><div class="status" id="loginStatus"></div><button id="loginGo">Войти</button></div></div>
+<div class="modal" id="adminModal"><div class="panel"><div class="panelTop"><h2>Панель учителя</h2><button class="close" id="closeAdmin">×</button></div><div class="status" id="adminStatus"></div><div id="adminContent"></div><div class="actions"><button class="secondary" id="logout">Выйти</button></div></div></div>
+
+<script>
+const db=supabase.createClient("https://njeviateaxviulfttntl.supabase.co","sb_publishable_TMdzjPqTgCSbTqbOdAmyJA_qzob1f-h");
+const $=id=>document.getElementById(id), esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const nice=k=>({created_at:"Дата",date:"Дата",day:"День",weekday:"День",time:"Время",subject:"Предмет",lesson:"Предмет",room:"Кабинет",title:"Заголовок",text:"Текст",content:"Текст",description:"Описание",image_url:"Фото",photo_url:"Фото",url:"Ссылка"}[k]||k);
+let cache={teachers:[],schedule:[],news:[],gallery:[]};
+async function loadAll(){for(const n of Object.keys(cache)){const r=await db.from(n).select("*");if(!r.error)cache[n]=r.data||[];else console.warn(n,r.error)}render()}
+function first(o,ks){for(const k of ks)if(o&&o[k])return o[k];return""}
+function render(){
+ let t=cache.teachers[0]||{};
+ let bio=first(t,["bio","description","about"]);
+ let f=["subject","experience","education","location","specialization","email","phone"];
+ let extra=f.filter(k=>t[k]).map(k=>`<p><b>${nice(k)}:</b> ${esc(t[k])}</p>`).join("");
+ $("teacherInfo").innerHTML=(bio?`<p>${esc(bio).replace(/\n/g,"<br>")}</p>`:"")+extra||"<p>Информация об учителе пока не заполнена.</p>";
+ let av=first(t,["avatar_url","photo_url","image_url"]);
+ $("heroPhoto").innerHTML=av?`<img src="${esc(av)}" alt="Фото учителя">`:"👩‍🏫";
+
+ const days=["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
+ let rows=cache.schedule;
+ if(!rows.length){
+   $("scheduleBody").innerHTML="<tr><td>Расписание пока не заполнено.</td></tr>";
+   $("scheduleHead").innerHTML="<th>Дни недели</th>";
+ }else{
+   $("scheduleHead").innerHTML="<th>День</th><th>Предметы</th>";
+   const dayKey=Object.keys(rows[0]).find(k=>["day","weekday","week_day","день"].includes(k.toLowerCase()))||"day";
+   const subjectKey=Object.keys(rows[0]).find(k=>["subject","lesson","name","предмет"].includes(k.toLowerCase()))||"subject";
+   const grouped={}; days.forEach(d=>grouped[d]=[]);
+   rows.forEach(r=>{let d=r[dayKey]||"Другой день";let sub=r[subjectKey]||"";(grouped[d]??=[]).push(sub)});
+   $("scheduleBody").innerHTML=days.filter(d=>grouped[d].length).map(d=>`<tr><td><b>${d}</b></td><td>${grouped[d].map(x=>`<div style="padding:4px 0">• ${esc(x)}</div>`).join("")}</td></tr>`).join("")||"<tr><td colspan='2'>Расписание пока не заполнено.</td></tr>";
+ }
+ let n=cache.news;
+ $("newsList").innerHTML=n.length?n.map(r=>`<article class="card"><h3>${esc(first(r,["title","name","heading"])||"Новость")}</h3><p>${esc(first(r,["text","content","description","body"]))}</p></article>`).join(""):'<div class="card">Новостей пока нет.</div>';
+ let g=cache.gallery;
+ $("albumList").innerHTML=g.length?g.map(r=>{let u=first(r,["image_url","photo_url","url","image"]),c=first(r,["title","caption","description","name"]);return `<div class="photo">${u?`<img src="${esc(u)}" alt="">`:""}${c?`<div>${esc(c)}</div>`:""}</div>`}).join(""):'<div class="photo"><div>Фотографий пока нет.</div></div>';
+}
+$("adminBtn").onclick=e=>{e.preventDefault();$("loginModal").classList.add("open")};$("closeLogin").onclick=()=>$("loginModal").classList.remove("open");$("closeAdmin").onclick=()=>$("adminModal").classList.remove("open");
+$("loginGo").onclick=()=>{if($("login").value==="Tamara062"&&$("password").value==="Tamara1962"){$("loginModal").classList.remove("open");buildAdmin();$("adminModal").classList.add("open")}else{$("loginStatus").textContent="Неверный логин или пароль.";$("loginStatus").style.display="block"}};
+$("logout").onclick=()=>$("adminModal").classList.remove("open");
+function keys(r){
+ return Object.keys(r||{}).filter(k=>!["id","created_at","updated_at","time","room"].includes(k));
+}
+function field(k,v){
+ if(k==="day") return `<label>День<select data-key="day"><option ${v==="Понедельник"?"selected":""}>Понедельник</option><option ${v==="Вторник"?"selected":""}>Вторник</option><option ${v==="Среда"?"selected":""}>Среда</option><option ${v==="Четверг"?"selected":""}>Четверг</option><option ${v==="Пятница"?"selected":""}>Пятница</option></select></label>`;
+ return `<label>${nice(k)}<input data-key="${esc(k)}" value="${esc(v??"")}"></label>`;
+}
+function buildAdmin(){let t=cache.teachers[0]||{};$("adminContent").innerHTML=`<div class="adminSection"><h3>О преподавателе</h3><div id="tf">${keys(t).map(k=>field(k,t[k])).join("")}</div>
+<label>Фото учителя
+<input id="teacherPhotoFile" type="file" accept="image/jpeg,image/png,image/webp" onchange="previewTeacherPhoto(event)">
+</label>
+<div id="teacherPreview" style="margin:10px 0"></div>
+<button onclick="saveTeacher()">Сохранить</button>
+<p class="small">После выбора фото нажмите «Сохранить». Фото автоматически уменьшается, чтобы его можно было сохранить в Supabase.</p></div><div class="adminSection"><h3>Расписание</h3><div id="se"></div><button class="secondary" onclick="addRow('schedule')">Добавить предмет</button><p class="small">Для каждого предмета выбирается день недели. Время и кабинет не нужны.</p></div><div class="adminSection"><h3>Новости</h3><div id="ne"></div><button class="secondary" onclick="addRow('news')">Добавить новость</button></div><div class="adminSection"><h3>Фотоальбом</h3><div id="ge"></div><button class="secondary" onclick="addRow('gallery')">Добавить фото</button><p class="small">Фото можно выбрать прямо с компьютера.</p></div>`;
+ const av=first(t,["avatar_url","photo_url","image_url"]);
+ if(av)$("teacherPreview").innerHTML='<img src="'+esc(av)+'" style="max-width:220px;max-height:220px;border-radius:12px;object-fit:cover">';
+ draw("schedule","se");draw("news","ne");draw("gallery","ge")}
+function draw(tab,id){let a=cache[tab];$(id).innerHTML=a.length?a.map((r,i)=>`<div class="editorRow" data-tab="${tab}" data-i="${i}">${keys(r).map(k=>field(k,r[k])).join("")}<div class="actions"><button onclick="saveRow('${tab}',${i})">Сохранить</button><button class="danger" onclick="delRow('${tab}',${i})">Удалить</button></div></div>`).join(""):"<p class='small'>Пока нет записей.</p>"}
+function addRow(tab){let r=cache[tab][0];let o={};if(r)keys(r).forEach(k=>o[k]="");else if(tab==="schedule")o={day:"Понедельник",subject:""};else if(tab==="news")o={title:"",text:"",date:""};else o={image_url:"",title:""};cache[tab].push(o);buildAdmin()}
+function rowData(tab,i){let x=document.querySelector(`[data-tab="${tab}"][data-i="${i}"]`),o={};x.querySelectorAll("[data-key]").forEach(e=>o[e.dataset.key]=e.value);return o}
+function previewTeacherPhoto(e){
+ const f=e.target.files[0];
+ if(!f)return;
+ if(!f.type.startsWith("image/")){show("Выберите файл изображения.");e.target.value="";return}
+ const r=new FileReader();
+ r.onload=()=>{
+   const img=new Image();
+   img.onload=()=>{
+     const max=1000;
+     let w=img.width,h=img.height;
+     if(w>max||h>max){const q=Math.min(max/w,max/h);w=Math.round(w*q);h=Math.round(h*q)}
+     const c=document.createElement("canvas");c.width=w;c.height=h;
+     c.getContext("2d").drawImage(img,0,0,w,h);
+     window.teacherPhotoData=c.toDataURL("image/jpeg",0.78);
+     $("teacherPreview").innerHTML='<img src="'+window.teacherPhotoData+'" style="width:220px;height:220px;border-radius:12px;object-fit:cover">';
+   };
+   img.src=r.result;
+ };
+ r.readAsDataURL(f);
+}
+async function saveTeacher(){
+ let t=cache.teachers[0]||null;
+ let o={name:"Тамара Салмановна"};
+ document.querySelectorAll("#tf [data-key]").forEach(e=>o[e.dataset.key]=e.value);
+ if(window.teacherPhotoData)o.avatar_url=window.teacherPhotoData;
+ if(o.avatar_url && o.avatar_url.length>900000){show("Фото получилось слишком большим. Выберите другое фото.");return}
+ let r=t ? await db.from("teachers").update(o).eq("id",t.id)
+         : await db.from("teachers").insert(o);
+ if(r.error){
+   show("Не удалось сохранить: "+r.error.message);
+ }else{
+   window.teacherPhotoData=null;
+   show("Информация и фото сохранены.");
+   await loadAll();
+   buildAdmin();
+ }
+}
+function show(m){$("adminStatus").textContent=m;$("adminStatus").style.display="block"}loadAll();
+</script></body></html>
